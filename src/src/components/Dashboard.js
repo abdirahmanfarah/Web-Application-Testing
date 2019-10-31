@@ -10,14 +10,18 @@ const Dashboard = () => {
   function BallCount() {
     if(ball === 4 || hit === 1) {
       return setBalls(0)
-    }else {
+    }else if (foul === 2){
       setBalls(ball + 1)
-    } 
+    } else {
+      setBalls(ball + 1)
+    }
   }
 
   function StrikeCount() {
     if(strikes === 3 || hit === 1) {
       return setStrikes(0)
+    } else if (foul === 1) {
+      setStrikes(strikes + 2)
     } else {
       setStrikes(strikes + 1)
     }
@@ -30,13 +34,15 @@ const Dashboard = () => {
     }
   }
 
-  // function foulCount() {
-  //   if(foul <= 1){
-  //     return setFoul(strikes + 2)
-  //   } else {
-  //     return setFoul(ball + 1)
-  //   }
-  // }
+  function foulCount() {
+    if(foul === 2){
+      return setFoul(2)
+    } else if(foul === 1) {
+      setFoul(foul + 1)
+    } else {
+      setFoul(0)
+    }
+  }
   return (
     <div>
       <div>
@@ -54,10 +60,10 @@ const Dashboard = () => {
         <button onClick={() => hitCount()}>hit</button>
       </div>
 
-      {/* <div>
+      <div>
         <h1>Foul: {foul} </h1>
         <button onClick={() => foulCount()}>foul</button>
-      </div> */}
+      </div>
 
     </div>
   )
